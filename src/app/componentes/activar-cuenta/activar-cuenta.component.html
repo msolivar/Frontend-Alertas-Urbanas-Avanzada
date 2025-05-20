@@ -1,0 +1,38 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="text-center">Activar Cuenta</h4>
+          <!-- <app-alerta [alerta]="alerta"></app-alerta> -->
+        </div>
+        <div class="card-body">
+          <form (ngSubmit)="ActivarCuenta()" #passwordForm="ngForm">
+
+            <div class="mb-3">
+              <label for="correo">Correo Electronico:</label>
+              <input type="email" class="form-control ng-pristine ng-invalid ng-touched"
+                formcontrolname="correo" id="correo" name="correo" placeholder="Ingrese el correo electrónico"
+                [(ngModel)]="cambioPassword.correo"  ng-reflect-name="correo" readonly>
+            </div>
+
+            <div class="mb-3"> 
+              <label for="comentarios">Token</label>
+              <textarea [(ngModel)]="cambioPassword.token"
+                class="form-control"
+                rows="4"
+                id="comentarios"
+                name="comentarios"
+                placeholder="Ingrese el token"></textarea>            
+            </div>
+            
+            <button type="submit" class="btn btn-primary btn-block"
+              [disabled]="passwordForm.invalid">Activar Cuenta</button>
+            <br>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,61 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="text-center">Cambiar contraseña</h4>
+          <!-- <app-alerta [alerta]="alerta"></app-alerta> -->
+        </div>
+        <div class="card-body">
+          <form (ngSubmit)="cambiarContrasena()" #passwordForm="ngForm">
+
+            <div class="mb-3">
+              <label for="correo">Correo Electronico:</label>
+              <input type="email" class="form-control ng-pristine ng-invalid ng-touched"
+                formcontrolname="correo" id="correo" name="correo" placeholder="Ingrese el correo electrónico"
+                [(ngModel)]="cambioPassword.correo"  ng-reflect-name="correo" readonly>
+            </div>
+
+            <div class="mb-3"> 
+              <label for="comentarios">Token</label>
+              <textarea [(ngModel)]="cambioPassword.token"
+                class="form-control"
+                rows="4"
+                id="comentarios"
+                name="comentarios"
+                placeholder="Ingrese el token"></textarea>            
+            </div>
+
+            <div class="mb-3">
+              <label for="nuevaContrasena">Contraseña nueva:</label>
+              <input [type]="mostrarPassword ? 'text' : 'password'" class="form-control" id="nuevaContrasena" name="contrasenia"
+                [(ngModel)]="cambioPassword.nuevaContrasena" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="confirmarContrasena">Confirmar contraseña:</label>
+              <input [type]="mostrarPassword ? 'text' : 'password'" class="form-control" id="confirmarContrasena" name="contraseniaConfirmada"
+                [(ngModel)]="cambioPassword.contraseniaConfirmada" required>
+            </div>
+
+            <div class="form-check mb-3">
+              <label class="form-check-label" for="VerPassword">Ver contraseña</label>
+              <input name="VerPassword" id="VerPassword" type="checkbox" class="form-check-input" (change)="mostrarPassword = !mostrarPassword">    
+            </div>
+
+            @if (!sonIguales()) { 
+              <div class="alert alert-danger mt-2">
+                Las contraseñas no coinciden
+              </div>
+            }
+            
+            <button type="submit" class="btn btn-primary btn-block"
+              [disabled]="passwordForm.invalid && !sonIguales()">Cambiar contraseña</button>
+            <br>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

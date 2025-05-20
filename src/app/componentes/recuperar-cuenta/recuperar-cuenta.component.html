@@ -1,0 +1,28 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="text-center">Recuperar cuenta</h4>
+            <!-- <app-alerta [alerta]="alerta"></app-alerta> -->
+          </div>
+          <div class="card-body">
+            <div class="text-justify mt-4">
+              <h6>El codigo de activacion tiene una vigencia de 15 minutos para poder activar la cuenta</h6>
+            </div>
+
+            <form #recuperarCuentaForm="ngForm">
+              <div class="form-group" >
+
+                <label for="email">Correo electrónico:</label>
+                <input type="email" class="form-control" id="email" [(ngModel)]="email" name="email" required>
+              </div>
+              <br>
+              <button [disabled]="recuperarCuentaForm.invalid" type="submit" class="btn btn-primary btn-block" (click)="recuperarContrasena()">Recuperar contraseña</button>
+              <br>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

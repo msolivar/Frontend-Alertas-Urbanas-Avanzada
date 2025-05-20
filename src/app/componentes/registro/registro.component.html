@@ -1,0 +1,70 @@
+<div class="container">
+    <div class="card">
+        <div class="card-header p-4">
+            <h5 class="mb-0"> <i class="fa-solid fa-user-plus me-3"></i>Crear Una Cuenta </h5>
+        </div>
+
+        <!-- <div class="mb-3">
+            <input
+              type="text"
+              #entradaInput
+              placeholder="Ingresa el correo del usuario"
+              class="form-control mb-2"
+              value="admin@reportes.com"
+            />
+            <button
+              class="btn btn-primary"
+              (click)="obtenerInformacion(entradaInput.value)"
+            >
+              Obtener información
+            </button>
+            <p id="salida">{{ salidaTexto }}</p>
+        </div> -->
+          
+        <div class="card-body p-4">
+            
+            <form class="row g-3" [formGroup]="loginForm" (ngSubmit)="registrar()">
+                <div class="d-flex align-items-center">
+                    <label class="mr-10">Nombre: </label>
+                    <input type="text" formControlName="nombre" class="form-control" placeholder="Ingrese el nombre y apellido" />
+                </div>
+                <div class="d-flex align-items-center">
+                    <label class="mr-10">Telefono: </label>
+                    <input type="text" formControlName="telefono" class="form-control" placeholder="Ingrese el telefono" />
+                </div>
+                <div class="d-flex align-items-center">
+                    <label class="mr-10">Correo electrónico: </label>
+                    <input type="email" formControlName="email" class="form-control" placeholder="Ingrese el correo electrónico" />
+                </div>
+                <div class="d-flex align-items-center">
+                    <label class="mr-10">Ciudad: </label>
+                    <select formControlName="ciudad" required class="form-select" >
+                        <option value="" selected>Seleccione una ciudad</option>
+                        @for (item of ciudades; track $index) { 
+                            <option [value]="item">{{item}}</option> 
+                        }
+                    </select>
+                </div>
+                <div class="d-flex align-items-center">
+                    <label class="mr-10">Direccion: </label>
+                    <input type="text" formControlName="direccion" class="form-control" placeholder="Ingrese la direccion" />
+                </div>
+                <div class="d-flex align-items-center">
+                    <label class="mr-10">Contraseña: </label>
+                    <input [type]="mostrarPassword ? 'text' : 'password'" formControlName="password" class="form-control" placeholder="Digite la contraseña" />
+                </div>
+                <div class="form-check mb-3">
+                    <label class="form-check-label" for="VerPassword">Ver contraseña</label>
+                    <input name="VerPassword" id="VerPassword" type="checkbox" class="form-check-input" (change)="mostrarPassword = !mostrarPassword">    
+                </div>
+
+                <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Registrarse</button>
+                <!-- <button type="submit" [disabled]="f.invalid">Registrarse</button> -->
+            </form>
+        </div>
+
+        <div class="text-center mt-4">
+            <h6>¿Ya tienes una cuenta? <a routerLink="/login" class="link-primary">Iniciar Sesion</a></h6>
+        </div>
+    </div>
+</div>

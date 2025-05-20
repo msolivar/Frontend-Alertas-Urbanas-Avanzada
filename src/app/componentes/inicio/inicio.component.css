@@ -1,0 +1,19 @@
+.stars {
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.estrella-activa {
+  color: #f7941d; /* Naranja */
+  margin-right: 0px;
+}
+
+.estrella-inactiva {
+  color: #ccc; /* Gris claro */
+  margin-right: 0px;
+}
+
+#mapa {
+ width: 100vw;
+ height: 100vh;
+}

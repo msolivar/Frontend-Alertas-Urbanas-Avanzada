@@ -1,0 +1,75 @@
+<div class="container mt-4" style="background: whitesmoke">
+  <div class="row text-center">
+    <div class="col-12">
+      <h2>Cambiar Estado</h2>
+    </div>
+  </div>
+
+  <!-- Formulario style="border: 1px solid black;" -->
+  <div class="col-sm-12 col-md-12">
+
+    <div class="p-4" style="background: whitesmoke;">
+
+      <form #categoriaForm="ngForm">
+        <div class="mb-3">
+          <label class="mr-10">Categoria: </label>
+          <select [(ngModel)]="reporteSeleccionado.nuevoEstado" name="categoria" required class="form-select">
+            <option value="" selected>Seleccione el estado</option>
+            @for (item of estados; track $index) {
+            <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="categoriaDescripcion" class="form-label">Motivo</label>
+          <textarea id="categoriaDescripcion" class="form-control" name="descripcion" required
+            placeholder=" Ingrese el Motivo " [(ngModel)]="reporteSeleccionado.motivo">
+                    </textarea>
+        </div>
+      </form>
+
+      <!-- Botones Formulario -->
+      <div class="modal-footer">
+        <button [disabled]="categoriaForm.invalid" *ngIf="mostrarBotonAgregar" type="button" class="btn btn-success"
+          (click)="agregarComentario()">
+          <i class="fa-solid fa-floppy-disk"></i> Agregar
+        </button>
+        <br><br>
+        <!-- <button [disabled]="categoriaForm.invalid" type="button"
+                    class="btn btn-danger" (click)="limpiarCampos()">
+                    <i class="fa-solid fa-rotate-right"></i> Limpiar Campos
+                </button> -->
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Tabla Comentarios -->
+  <ng-container *ngFor="let comentario of comentarios">
+    <p style="font-size: 16px; margin: 0px; background-color: aliceblue">
+      <b>Estado:</b> {{ comentario.estado }}
+    </p>
+    <p style="font-size: 16px; margin: 0px; background-color: aliceblue">
+      <b>Motivo:</b> {{ comentario.motivoCambioEstado }}
+    </p>
+  </ng-container>
+
+  <table class="margen table table-hover table-condensed table-bordered mt-3">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Estado</th>
+        <th scope="col">Fecha de Creación</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let comentario of comentarios">
+        <td style="background-color: aliceblue">{{ comentario.nombre }}</td>
+        <td style="background-color: aliceblue">{{ comentario.estado }}</td>
+        <td style="background-color: aliceblue">
+          {{ comentario.fechaCreacion | date:'dd/MM/yyyy hh:mm:ss a' }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

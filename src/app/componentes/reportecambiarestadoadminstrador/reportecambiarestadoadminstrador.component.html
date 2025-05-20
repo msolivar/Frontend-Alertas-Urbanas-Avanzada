@@ -1,0 +1,90 @@
+<div class="container mt-4" style="background: whitesmoke">
+    <div class="row text-center">
+        <div class="col-12">
+            <h2>Cambiar Estado Del Reporte</h2>
+        </div>
+    </div>
+
+    <!-- Formulario style="border: 1px solid black;" -->
+    <div class="col-sm-12 col-md-12">
+
+        <div class="p-4" style="background: whitesmoke;">
+
+            <form #categoriaForm="ngForm">
+                <div class="mb-3">
+                    <label class="mr-10">Id Reporte:</label>
+                    <input type="text" [(ngModel)]="reporteSeleccionado.idReporte" name="idReporte" id="idReporte" readonly
+                    class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label class="mr-10">Categoria: </label>
+                    <select [(ngModel)]="reporteSeleccionado.nuevoEstado" name="categoria" required
+                        class="form-select">
+                        <option value="" selected>Seleccione el estado</option>
+                        @for (item of estados; track $index) {
+                        <option [value]="item">{{ item }}</option>
+                        }
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="categoriaDescripcion" class="form-label">Motivo</label>
+                    <textarea id="categoriaDescripcion" class="form-control" name="descripcion" required
+                        placeholder=" Ingrese el Motivo " [(ngModel)]="reporteSeleccionado.motivo">
+                    </textarea>
+                </div>
+            </form>
+
+            <!-- Botones Formulario -->
+            <div class="modal-footer">
+                <button [disabled]="categoriaForm.invalid" *ngIf="mostrarBotonAgregar" type="button"
+                    class="btn btn-success" (click)="cambiarEstado()">
+                    <i class="fa-solid fa-floppy-disk"></i> AgregarEstado
+                </button>
+                <!-- <button [disabled]="categoriaForm.invalid" type="button"
+                    class="btn btn-danger" (click)="limpiarCampos()">
+                    <i class="fa-solid fa-rotate-right"></i> Limpiar Campos
+                </button> -->
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Buscador -->
+    <input type="text" [formControl]="filtroNombre" placeholder="Buscar por nombre..."
+        class="form-control mb-3" />
+
+    <!-- Tabla Comentarios -->
+    <table class="margen table table-hover table-condensed table-bordered mt-3">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Descripcion</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Imagen</th>
+                <th scope="col" style="text-align: center">Editar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let comentario of reportesFiltrados">
+                <tr *ngIf="comentario.estado !== 'RESUELTO' && comentario.estado !== 'VERIFICADO'">
+                    <td style="background-color: aliceblue">{{ comentario.nombre }}</td>
+                    <td style="background-color: aliceblue">{{ comentario.descripcion }}</td>
+                    <td style="background-color: aliceblue">{{ comentario.estado }}</td>
+                    <td style="background-color: aliceblue">{{ comentario.fechaCreacion | date:'dd/MM/yyyy hh:mm:ss a' }}</td>
+                    <td style="background-color: aliceblue" style="text-align: center">
+                        <img [src]="comentario.rutaImagenes" class="bd-placeholder-img card-img-top"
+                            alt="{{comentario.nombre}}" height="100" style="object-fit: cover; width: 50%;" />
+                    </td>
+                    
+                    <td style="text-align: center; background-color: aliceblue">
+                        <button class="btn btn-primary" (click)="editarFormulario(comentario)">
+                            <i class="fas fa-edit"></i> Editar
+                        </button>
+                    </td>
+                </tr>
+            </ng-container>
+            
+        </tbody>
+    </table>
+</div>

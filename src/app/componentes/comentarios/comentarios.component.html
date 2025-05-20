@@ -1,0 +1,69 @@
+<div class="container mt-4" style="background: whitesmoke">
+    <div class="row text-center">
+        <div class="col-12">
+            <h2>Crear Comentario</h2>
+        </div>
+    </div>
+
+    <!-- Formulario style="border: 1px solid black;" -->
+    <div class="col-sm-12 col-md-12">
+
+        <div class="p-4" style="background: whitesmoke;">
+
+            <form #categoriaForm="ngForm">
+
+                <div class="mb-3">
+                    <label for="categoriaDescripcion" class="form-label">Comentario</label>
+                    <textarea id="categoriaDescripcion" class="form-control" name="descripcion" required
+                        placeholder=" Ingrese el comentario "
+                        [(ngModel)]="categoriaSeleccionada.comentarioTexto">
+                    </textarea>
+                </div>
+            </form>
+
+            <!-- Botones Formulario -->
+            <div class="modal-footer">
+                <button [disabled]="categoriaForm.invalid" *ngIf="mostrarBotonAgregar" type="button"
+                    class="btn btn-success" (click)="agregarComentario()">
+                    <i class="fa-solid fa-floppy-disk"></i> Agregar
+                </button>
+                <br><br>
+                <button [disabled]="categoriaForm.invalid" type="button"
+                    class="btn btn-danger" (click)="limpiarCampos()">
+                    <i class="fa-solid fa-rotate-right"></i> Limpiar Campos
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Buscador -->
+    <div class="row g-3">
+        <div class="d-flex align-items-center">
+            <label class="mr-10">Consultar: </label>
+            <input type="text" name="buscador" class="form-control" 
+            placeholder=" Ingrese el campo que quiera consultar en la base de datos" 
+            [(ngModel)]="terminoBusqueda" />
+        </div>
+    </div>
+    <table class="margen table table-hover table-condensed table-bordered mt-3">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let comentario of comentarioFiltrados()">
+                <td style="background-color: aliceblue">
+                    <p>{{ comentario.comentarioTexto }}</p>
+                </td>
+                <td style="background-color: aliceblue">
+                    <span>
+                        {{ comentario.fecha | date:'dd/MM/yyyy hh:mm:ss a' }}
+                    </span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

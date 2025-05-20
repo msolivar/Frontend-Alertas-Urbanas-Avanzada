@@ -1,0 +1,84 @@
+<div class="container mt-4" style="background: whitesmoke">
+    <div class="row text-center">
+        <div class="col-12">
+            <h2>Generar Reportes PDF</h2>
+        </div>
+    </div>
+
+    <!-- Formulario style="border: 1px solid black;" -->
+    <div class="col-sm-12 col-md-12">
+
+        <div class="p-4" style="background: whitesmoke;">
+
+            <form #categoriaForm="ngForm">
+                <div class="mb-3">
+                    <label class="mr-10">Categoria: </label>
+                    <select [(ngModel)]="reporteSeleccionado.categoria" name="categoria" required
+                        class="form-select">
+                        <option value="" selected>Seleccione la categoria</option>
+                        @for (item of categorias; track $index) {
+                        <option [value]="item.nombre">{{item.nombre}}</option>
+                        }
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="mr-10">Fecha Inicio Reporte:</label>
+                    <input type="date" [(ngModel)]="reporteSeleccionado.fechaInicio" name="fechaInicio" id="fechaInicio"
+                    class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label class="mr-10">Fecha Final Reporte:</label>
+                    <input type="date" [(ngModel)]="reporteSeleccionado.fechaFinal" name="fechaFinal" id="fechaFinal"
+                    class="form-control" required>
+                </div>
+            </form>
+
+            <!-- Botones Formulario -->
+            <div class="modal-footer">
+                <button [disabled]="categoriaForm.invalid" *ngIf="mostrarBotonAgregar" type="button"
+                    class="btn btn-success" (click)="cambiarEstado()">
+                    <i class="fa-solid fa-floppy-disk"></i> Generar Reporte en PDF
+                </button>
+                <br><br>
+                <button [disabled]="categoriaForm.invalid" type="button"
+                    class="btn btn-danger" (click)="limpiarCampos()">
+                    <i class="fa-solid fa-rotate-right"></i> Limpiar Campos
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Buscador -->
+    <input type="text" [formControl]="filtroNombre" placeholder="Buscar por nombre..."
+        class="form-control mb-3" />
+
+    <!-- Tabla Comentarios -->
+    <table class="margen table table-hover table-condensed table-bordered mt-3">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Descripcion</th>
+                <th scope="col">Categoria</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Fecha de Creación</th>
+                <!-- <th scope="col" style="text-align: center">Editar</th> -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let comentario of reportesFiltrados">
+                <td style="background-color: aliceblue">{{ comentario.nombre }}</td>
+                <td style="background-color: aliceblue">{{ comentario.descripcion }}</td>
+                <td style="background-color: aliceblue">{{ comentario.categoria }}</td>
+                <td style="background-color: aliceblue">{{ comentario.estado }}</td>
+                <td style="background-color: aliceblue">{{ comentario.fechaCreacion | date:'dd/MM/yyyy hh:mm:ss a' }}</td>
+                <!-- <td style="text-align: center; background-color: aliceblue">
+                    <button class="btn btn-primary" (click)="editarFormulario(comentario)">
+                        <i class="fas fa-edit"></i> Editar
+                    </button>
+                </td> -->
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
